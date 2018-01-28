@@ -46,6 +46,7 @@ class FixtureBox::Test < ActiveSupport::TestCase
     assert_equal 'Natsume Soseki', @fixture_box.books(:wagahai_wa_neko_de_aru).author.name
 
     # Set the model class
+    assert_equal 'application/zip', @fixture_box.book_files(:wagahai_wa_neko_de_aru_zip).content_type
     assert_equal %w(application/zip application/x-expandedbook), @fixture_box.books(:wagahai_wa_neko_de_aru).files.pluck(:content_type)
 
     # Get all instances
