@@ -1,5 +1,5 @@
 # FixtureBox
-Short description and motivation.
+Dynamically creating ActiveRecord Fixtures.
 
 ## Usage
 

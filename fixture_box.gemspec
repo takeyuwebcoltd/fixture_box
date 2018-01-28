@@ -10,8 +10,8 @@ Gem::Specification.new do |s|
   s.authors     = ["Takeyu Web Inc."]
   s.email       = ["yuichi.takeuchi@takeyuweb.co.jp"]
   s.homepage    = "https://github.com/takeyuwebcoltd/fixture_box"
-  s.summary     = "Dynamically creating fixtures."
-  s.description = "Dynamically creating fixtures."
+  s.summary     = "Dynamically creating ActiveRecord Fixtures."
+  s.description = "Dynamically creating ActiveRecord Fixtures."
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
