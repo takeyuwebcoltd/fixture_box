@@ -13,7 +13,7 @@ class FixtureBox
       decorated_class_names = {}
       data.each do |fixture_set_name, fixture_data|
         fixture_class = class_names[fixture_set_name] || fixture_set_name.to_s.classify.constantize
-        decorated_fixture_set_name = fixture_set_name
+        decorated_fixture_set_name = decorate_fixture_set_name(fixture_set_name)
 
         decorated_fixture_set_names << decorated_fixture_set_name
         decorated_class_names[decorated_fixture_set_name] = fixture_class
@@ -31,10 +31,22 @@ class FixtureBox
 
   private
 
+  def fixture_set_name_prefix
+    "fixture_box:#{object_id}"
+  end
+
+  def decorate_fixture_set_name(fixture_set_name)
+    "#{fixture_set_name_prefix}:#{fixture_set_name}"
+  end
+
+  def accessor_name(decorated_fixture_set_name)
+    decorated_fixture_set_name.match(/^#{fixture_set_name_prefix}:(.+)$/).captures.first
+  end
+
   def setup_fixture_accessors
-    @loaded_fixture_sets.each do |fixture_set_name, fixture_set|
-      define_singleton_method(fixture_set_name) do |*fixture_names|
-        fixture_names = @loaded_fixture_sets[fixture_set_name].fixtures.keys if fixture_names.empty?
+    @loaded_fixture_sets.each do |decorated_fixture_set_name, fixture_set|
+      define_singleton_method(accessor_name(decorated_fixture_set_name)) do |*fixture_names|
+        fixture_names = @loaded_fixture_sets[decorated_fixture_set_name].fixtures.keys if fixture_names.empty?
 
         instances = fixture_names.map do |fixture_name|
           fixture_set[fixture_name.to_s].find

@@ -66,6 +66,8 @@ assert_equal %w(application/zip application/x-expandedbook), @fixture_box.books(
 assert_equal ['Wagahai wa Neko de Aru', 'Ame ni mo Makezu'], @fixture_box.books.map(&:name)
 ```
 
+See more at `test/fixture_box_test.rb`
+
 ## Installation
 Add this line to your application's Gemfile:
 
